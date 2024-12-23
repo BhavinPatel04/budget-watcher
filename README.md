@@ -48,3 +48,6 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+{"assets": [{"assetId": null, "base64": null, "duration": null, "exif": null, "fileName": "2154785a-4321-4de2-98a2-b5ca6bce8ce5.jpeg", "fileSize": 2728901, "height": 2268, "mimeType": "image/jpeg", "rotation": null, "type": "image", "uri": "file:///data/user/0/com.budgetwatcher.android/cache/ImagePicker/2154785a-4321-4de2-98}]}
