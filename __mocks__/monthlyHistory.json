@@ -1,0 +1,88 @@
+{
+  "December 2024": {
+    "id": "December 2024",
+    "name": "December 2024",
+    "price": 100.0,
+    "lastMonthPrice": 200.0,
+    "items": [
+      {
+        "category": "Dairy",
+        "id": "FB Grated Cheese",
+        "name": "FB Grated Cheese",
+        "price": 7.99
+      },
+      {
+        "category": "Baking goods",
+        "id": "Burnbrae LrgWht",
+        "name": "Burnbrae LrgWht",
+        "price": 3.19
+      },
+      {
+        "category": "Baking goods",
+        "id": "Burnbrae LrgWht",
+        "name": "Burnbrae LrgWht",
+        "price": 3.19
+      },
+      {
+        "category": "Condiment",
+        "id": "Organc Garlic Puree",
+        "name": "Organc Garlic Puree",
+        "price": 3.49
+      },
+      {
+        "category": "Other",
+        "id": "GINGER Minced",
+        "name": "GINGER Minced",
+        "price": 5.99
+      },
+      {
+        "category": "Cleaners",
+        "id": "Windsor Salt",
+        "name": "Windsor Salt",
+        "price": 2.29
+      },
+      {
+        "category": "Dairy",
+        "id": "YOGURT Plain HE",
+        "name": "YOGURT Plain HE",
+        "price": 4.49
+      },
+      {
+        "category": "Bakery",
+        "id": "PaneDi Como Loaf",
+        "name": "PaneDi Como Loaf",
+        "price": 4.49
+      },
+      {
+        "category": "Canned",
+        "id": "Grape Tomato",
+        "name": "Grape Tomato",
+        "price": 4.99
+      },
+      {
+        "category": "Canned",
+        "id": "Black Sliced 01i ves",
+        "name": "Black Sliced 01i ves",
+        "price": 2.49
+      },
+      {
+        "category": "Frozen food",
+        "id": "Barilla Rotini",
+        "name": "Barilla Rotini",
+        "price": 3.49
+      },
+      {
+        "category": "Healthy",
+        "id": "SpecialK Original",
+        "name": "SpecialK Original",
+        "price": 6.99
+      },
+      {
+        "category": "Produce",
+        "id": "SPINACH Bunch",
+        "name": "SPINACH Bunch",
+        "price": 2.99
+      }
+    ]
+  }
+}

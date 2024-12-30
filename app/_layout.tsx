@@ -1,16 +1,18 @@
 import { useEffect } from "react";
-import {
-  StyleSheet
-} from "react-native";
+import { StyleSheet } from "react-native";
+import { Provider as ReduxProvider } from "react-redux";
 import { Stack } from "expo-router";
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { Provider } from '@ant-design/react-native';
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { TamaguiProvider } from "tamagui";
+import { store } from "@/store";
+import config from "@/tamagui.config";
 
 export default function RootLayout() {
   const [fontsLoaded, fontsError] = useFonts({
-    antoutline: require('@ant-design/icons-react-native/fonts/antoutline.ttf'),
-  })
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+  });
   useEffect(() => {
     if (fontsLoaded || fontsError) {
       SplashScreen.hideAsync();
@@ -19,24 +21,41 @@ export default function RootLayout() {
 
   if (!fontsLoaded && !fontsError) {
     return null;
-  };
+  }
 
-  return <Provider>
-    <Stack 
-      screenOptions={{
-        headerShown: false,
-        contentStyle: {
-          ...styles.container
-        },
-      }}
-    />
-  </Provider>;
+  return (
+    <ReduxProvider store={store}>
+      <TamaguiProvider config={config}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {
+              ...styles.container,
+            },
+          }}
+        >
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: false,
+              contentStyle: {
+                ...styles.tabContainer,
+              },
+            }}
+          />
+        </Stack>
+      </TamaguiProvider>
+    </ReduxProvider>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    backgroundColor: "#ffffff",
+  },
+  tabContainer: {
+    flex: 1,
+    backgroundColor: "#ffffff",
   },
 });
