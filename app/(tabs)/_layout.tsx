@@ -36,7 +36,7 @@ export default function TabLayout() {
                 ),
               }}
             />
-            <Tabs.Screen
+            {/* <Tabs.Screen
               name="info"
               options={{
                 title: "Info",
@@ -44,7 +44,7 @@ export default function TabLayout() {
                   <FontAwesome size={28} name="info-circle" color={color} />
                 ),
               }}
-            />
+            /> */}
           </Tabs>
         </Theme>
       </SafeAreaView>

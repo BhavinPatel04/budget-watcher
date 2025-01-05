@@ -9,6 +9,7 @@ export type AppInitialState = {
   subCategories: SubCategoryItem[];
   monthlyHistory: MonthlyHistory;
   selectedMonth: string;
+  storeNames: string[];
 };
 
 const currentMonth = moment().format(DATE_FORMAT);
@@ -26,6 +27,7 @@ const initialState: AppInitialState = {
   subCategories: [],
   monthlyHistory: {},
   selectedMonth: currentMonth,
+  storeNames: [],
 };
 
 const appSlice = createSlice({
@@ -78,7 +80,10 @@ const appSlice = createSlice({
       state.subCategories = [];
     },
     addMonthlyHistory: (state, action: PayloadAction<MonthlyHistory>) => {
-      state.monthlyHistory = action.payload;
+      state.monthlyHistory = {
+        ...state.monthlyHistory,
+        ...action.payload,
+      };
     },
     addMonthlyHistoryItem: (state, action: PayloadAction<MonthlyHistory>) => {
       state.monthlyHistory = {
@@ -95,8 +100,20 @@ const appSlice = createSlice({
     updateSelectedMonth: (state, action: PayloadAction<string>) => {
       state.selectedMonth = action.payload;
     },
+    addStoreName: (state, action: PayloadAction<string>) => {
+      state.storeNames = [...state.storeNames, action.payload];
+    },
+    addStoreNames: (state, action: PayloadAction<string[]>) => {
+      state.storeNames = state.storeNames.concat(action.payload);
+    },
+    deleteStoreName: (state, action: PayloadAction<string>) => {
+      state.storeNames = state.storeNames.filter(
+        (storeName) => storeName !== action.payload,
+      );
+    },
   },
   selectors: {
+    storeNamesSelector: (state) => state.storeNames,
     categoriesSelector: (state) => state.categories,
     subCategoriesSelector: (state) => state.subCategories,
     monthlyHistorySelector: (state) => state.monthlyHistory,

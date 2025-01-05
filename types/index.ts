@@ -3,7 +3,8 @@ export type ReceiptItem = {
   name: string;
   price: number;
   category: Category;
-  subCategory?: string;
+  subCategory: string;
+  storeName: string;
 };
 
 export type ReviewReceiptItem = Omit<ReceiptItem, "price"> & {
@@ -14,7 +15,6 @@ export type MonthlyHistoryItem = {
   id: string;
   name: string;
   price: number;
-  lastMonthPrice: number;
   items: ReceiptItem[];
   categoryTotal: {
     [key in Category]: number;

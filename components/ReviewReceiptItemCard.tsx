@@ -3,7 +3,7 @@ import { NumericFormat } from "react-number-format";
 import { View, XStack, Text, CardProps, Card, getTokens } from "tamagui";
 import { Plus, Trash2, RefreshCw } from "@tamagui/lucide-icons";
 import { Category, ReviewReceiptItem, SubCategoryItem } from "@/types";
-import { AppButton } from "./AppButton";
+import AppButton from "./AppButton";
 import { AppSelect } from "./AppSelect";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { appSelectors } from "@/store/app/slice";
@@ -59,11 +59,9 @@ export function ReviewReceiptItemCard({
       const subCategory = await getFoodCategory(item.name);
       if (subCategory) {
         const subCategoryValue = subCategory[item.name];
-        console.log("=======> subCategoryValue", subCategoryValue);
         if (
           !receiptSubCategories.find((item) => item.name === subCategoryValue)
         ) {
-          console.log("=======> adding subCategoryValue");
           appDispatch(
             receiptItemsActions.addSubCategory({
               name: subCategoryValue,

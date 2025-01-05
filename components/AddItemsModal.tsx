@@ -9,7 +9,7 @@ import {
   receiptItemsSelectors,
   receiptItemsActions,
 } from "@/store/receiptItems/slice";
-import { AppButton } from "./AppButton";
+import AppButton from "./AppButton";
 
 export type AddItemsModalProps = {
   modalVisible: boolean;

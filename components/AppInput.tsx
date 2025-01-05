@@ -15,7 +15,6 @@ export type AppInputProps = InputProps & {
 };
 
 const AppInput = forwardRef<Input, AppInputProps>((props, ref) => {
-  // export function AppInput({ ref, ...props }: AppInputProps) {
   return <StyledInput ref={ref} {...props} />;
 });
 

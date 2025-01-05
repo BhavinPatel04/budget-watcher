@@ -46,7 +46,7 @@ export function CategorySelection({
 }: CategorySelectionProps) {
   const selectedMonth = useAppSelector(appSelectors.selectedMonthSelector);
   const monthlyHistory = useAppSelector(appSelectors.monthlyHistorySelector);
-  const lastMonth = moment(selectedMonth)
+  const lastMonth = moment(selectedMonth, DATE_FORMAT)
     .subtract(1, "month")
     .format(DATE_FORMAT);
   const history: MonthlyHistoryItem = monthlyHistory[selectedMonth] || {};

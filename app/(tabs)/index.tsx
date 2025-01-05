@@ -18,7 +18,7 @@ import { AppSelectItem } from "@/types";
 import { DATE_FORMAT } from "@/constants/app";
 import { appActions, appSelectors } from "@/store/app/slice";
 import monthlyHistoryMock from "@/__mocks__/monthlyHistory.json";
-import { AppButton } from "@/components/AppButton";
+import AppButton from "@/components/AppButton";
 
 const appTokens = getTokens();
 
@@ -30,6 +30,7 @@ export default function Index() {
     useState<boolean>(false);
   const [months, setMonths] = useState<AppSelectItem[]>([]);
   const selectedMonth = useAppSelector(appSelectors.selectedMonthSelector);
+  const currentMonth = moment().format(DATE_FORMAT);
 
   const launchPhoneCamera = async () => {
     setIsAddingItemsLoading(true);
@@ -76,6 +77,10 @@ export default function Index() {
   useEffect(() => {
     // reset on load
     appDispatch(receiptItemsActions.reset());
+    if (!selectedMonth) {
+      appDispatch(appActions.updateSelectedMonth(currentMonth));
+    }
+    // appDispatch(appActions.updateSelectedMonth(currentMonth));
 
     // reset app state
     // appDispatch(appActions.reset());

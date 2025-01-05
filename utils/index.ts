@@ -41,3 +41,9 @@ export const isPureString = (input: string): boolean => {
 export const isPureLineString = (input: string): boolean => {
   return /^[a-zA-Z\s]+$/.test(input);
 };
+
+export const getRandomStoreName = (): string => {
+  const storeName = "Store#";
+  const randomNumber = Math.floor(Math.random() * 1000);
+  return `${storeName}${randomNumber}`;
+};

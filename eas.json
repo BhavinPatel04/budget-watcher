@@ -8,6 +8,12 @@
       "developmentClient": true,
       "distribution": "internal"
     },
+    "ios-simulator": {
+      "extends": "development",
+      "ios": {
+        "simulator": true
+      }
+    },
     "local": {
       "android": {
         "buildType": "apk"
@@ -18,11 +24,11 @@
         "gradleCommand": ":app:assembleRelease"
       }
     },
-    "preview3": {
-      "developmentClient": true
-    },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
     },
     "production": {
       "autoIncrement": true

@@ -14,7 +14,7 @@ import {
   getTokens,
 } from "tamagui";
 import { LinearGradient } from "tamagui/linear-gradient";
-import { AppButton } from "./AppButton";
+import AppButton from "./AppButton";
 import { AppSelectItem } from "@/types";
 import AppInput from "./AppInput";
 

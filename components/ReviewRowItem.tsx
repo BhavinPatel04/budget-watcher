@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { NumericFormat } from "react-number-format";
-import { Input, View, XStack, YStack, Text } from "tamagui";
+import { View, XStack, YStack, Text } from "tamagui";
 import { Plus, Trash2, X } from "@tamagui/lucide-icons";
-import { Categories, Category, ReviewReceiptItem } from "@/types";
+import { ReviewReceiptItem } from "@/types";
 import { EditItemModal } from "./EditItemModal";
-import { AppButton } from "./AppButton";
+import AppButton from "./AppButton";
 import AppInput from "./AppInput";
 import { AppSelect } from "./AppSelect";
 import { useAppDispatch, useAppSelector } from "@/hooks";
@@ -15,7 +15,7 @@ import {
 } from "@/store/receiptItems/slice";
 
 export type ReviewRowItemProps = {
-  key?: string;
+  dataKey?: string;
   index?: number;
   style?: Record<string, unknown>;
   item: ReviewReceiptItem;
@@ -26,7 +26,7 @@ export type ReviewRowItemProps = {
 };
 
 export function ReviewRowItem({
-  key = "review-row-item",
+  dataKey = "review-row-item",
   index = 0,
   style,
   item,
@@ -40,6 +40,18 @@ export function ReviewRowItem({
   const [categoryChangeModalVisible, setCategoryChangeModalVisible] =
     React.useState(false);
 
+  const showEditItemButton = item.subCategory && item.name !== item.subCategory;
+  const showAddSubCategoryButton =
+    item.id !== "newItem" &&
+    (!item.subCategory || item.name === item.subCategory);
+
+  const getNewSubCategory = (name: string, item: ReviewReceiptItem) => {
+    if (item.name === item.subCategory) {
+      return name;
+    }
+    return item.subCategory;
+  };
+
   const handleCategoryChangeModalClose = () => {
     setCategoryChangeModalVisible(false);
   };
@@ -51,7 +63,7 @@ export function ReviewRowItem({
   return (
     <>
       <XStack
-        key={key}
+        key={dataKey}
         flex={1}
         justifyContent="center"
         alignItems="flex-start"
@@ -60,11 +72,6 @@ export function ReviewRowItem({
       >
         <XStack flex={1} alignItems="center" justifyContent="center">
           {iconName === "plus" && (
-            // <Plus
-            //   onPress={() => {
-            //     onAdd && onAdd(item);
-            //   }}
-            // />
             <AppButton
               circular
               onPress={() => {
@@ -75,11 +82,6 @@ export function ReviewRowItem({
             </AppButton>
           )}
           {iconName === "close" && (
-            // <X
-            //   onPress={() => {
-            //     onDelete && onDelete(item.id);
-            //   }}
-            // />
             <AppButton
               circular
               onPress={() => {
@@ -93,12 +95,6 @@ export function ReviewRowItem({
         <XStack flex={4} alignItems="center" justifyContent="center">
           <YStack flex={1} gap="$2">
             <YStack>
-              {/* <Input
-                style={{ width: "100%" }}
-                placeholder="Item name"
-                value={item.name}
-                onChangeText={(text) => onUpdate({ ...item, name: text })}
-              /> */}
               <AppSelect
                 id={`change-name-select-${index}`}
                 label="Item names"
@@ -106,10 +102,12 @@ export function ReviewRowItem({
                 items={lines.map((c) => ({ name: c }))}
                 selectedItem={item.name}
                 onValueChange={(text) => {
-                  onUpdate({ ...item, name: text });
+                  const subCategory = getNewSubCategory(text, item);
+                  onUpdate({ ...item, name: text, subCategory });
                 }}
                 onNewItemAdded={(name) => {
-                  onUpdate({ ...item, name });
+                  const subCategory = getNewSubCategory(name, item);
+                  onUpdate({ ...item, name, subCategory });
                   if (!lines.includes(name)) {
                     appDispatch(receiptItemsActions.addLine(name));
                   }
@@ -118,7 +116,7 @@ export function ReviewRowItem({
             </YStack>
             <YStack>
               <XStack flex={1} gap={6} alignItems="center">
-                {item.subCategory && (
+                {showEditItemButton && (
                   <>
                     <Text style={{ color: "#aaa" }}>{item.subCategory}</Text>
                     <AppButton
@@ -133,7 +131,7 @@ export function ReviewRowItem({
                     </AppButton>
                   </>
                 )}
-                {item.id !== "newItem" && !item.subCategory && (
+                {showAddSubCategoryButton && (
                   <AppButton
                     chromeless
                     unstyled

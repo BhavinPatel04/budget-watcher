@@ -69,10 +69,18 @@ const receiptItemsSlice = createSlice({
       state.allItems = [];
     },
     updateItem: (state, action: PayloadAction<ReceiptItem>) => {
-      const { id, name, price, subCategory, category } = action.payload;
+      const { id, name, price, subCategory, category, storeName } =
+        action.payload;
       const index = state.items.findIndex((item) => item.id === id);
       if (index >= 0) {
-        state.items[index] = { id, name, price, subCategory, category };
+        state.items[index] = {
+          id,
+          name,
+          price,
+          subCategory,
+          category,
+          storeName,
+        };
       }
     },
     updateItems: (state, action: PayloadAction<ReceiptItem[]>) => {

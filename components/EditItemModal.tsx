@@ -23,7 +23,7 @@ import {
 import { SubCategoryItem, Category, ReviewReceiptItem } from "@/types";
 import { getFoodCategory } from "@/utils/fdc";
 import { CategorySelection } from "./CategorySelection";
-import { AppButton } from "./AppButton";
+import AppButton from "./AppButton";
 
 export type EditItemModalProps = {
   selectedSubCategory?: string;

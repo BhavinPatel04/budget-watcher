@@ -1,5 +1,5 @@
 import { tokens } from "@tamagui/config/v3";
-import React from "react";
+import React, { forwardRef } from "react";
 import {
   Button,
   ButtonProps,
@@ -104,32 +104,45 @@ export type AppButtonProps = ButtonProps & {
   loading?: boolean;
 };
 
-export function AppButton({
-  priority = "secondary",
-  buttonSize = "medium",
-  loading = false,
-  unstyled,
-  disabled,
-  ...props
-}: AppButtonProps) {
-  return (
-    <StyledButton
-      unstyled={unstyled}
-      padding={!unstyled && 8}
-      priority={unstyled ? undefined : priority}
-      noTextWrap
-      disabled={disabled || loading}
-      size={Number(tokens.size.$true)}
-      {...props}
-    >
-      <XStack gap={8} alignItems="center">
-        {loading && <StyledButtonSpinner size="small" priority={priority} />}
-        {props.children && (
-          <StyledButtonText priority={priority} textSize={buttonSize}>
-            {props.children}
-          </StyledButtonText>
-        )}
-      </XStack>
-    </StyledButton>
-  );
-}
+const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
+  (props, ref) => {
+    // export function AppButton({
+    //   priority = "secondary",
+    //   buttonSize = "medium",
+    //   loading = false,
+    //   unstyled,
+    //   disabled,
+    //   ...props
+    // }: AppButtonProps) {
+    const {
+      priority = "secondary",
+      buttonSize = "medium",
+      loading = false,
+      unstyled,
+      disabled,
+    } = props;
+    return (
+      <StyledButton
+        ref={ref}
+        unstyled={unstyled}
+        padding={!unstyled && 8}
+        priority={unstyled ? undefined : priority}
+        noTextWrap
+        disabled={disabled || loading}
+        size={Number(tokens.size.$true)}
+        {...props}
+      >
+        <XStack gap={8} alignItems="center">
+          {loading && <StyledButtonSpinner size="small" priority={priority} />}
+          {props.children && (
+            <StyledButtonText priority={priority} textSize={buttonSize}>
+              {props.children}
+            </StyledButtonText>
+          )}
+        </XStack>
+      </StyledButton>
+    );
+  },
+);
+
+export default AppButton;

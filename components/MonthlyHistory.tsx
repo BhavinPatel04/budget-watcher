@@ -8,18 +8,24 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { CategorySelection } from "./CategorySelection";
 import { getDifferenceText, getDifferenceTextColor } from "@/utils";
 import { MonthlyHistoryAccordion } from "./MonthlyHistoryAccordion";
+import moment from "moment";
+import { DATE_FORMAT } from "@/constants/app";
 
 export type MonthlyHistoryProps = {};
 
 export function MonthlyHistory({}: MonthlyHistoryProps) {
   const selectedMonth = useAppSelector(appSelectors.selectedMonthSelector);
   const monthlyHistory = useAppSelector(appSelectors.monthlyHistorySelector);
+  const lastMonth = moment(selectedMonth, DATE_FORMAT)
+    .subtract(1, "month")
+    .format(DATE_FORMAT);
   const [selectedCategory, setSelectedCategory] = React.useState<Category>(
     Categories.Groceries,
   );
   const history: MonthlyHistoryItem = monthlyHistory[selectedMonth] || {};
+  const lastMonthHistory: MonthlyHistoryItem = monthlyHistory[lastMonth] || {};
   const difference =
-    Number(history.price || 0) - Number(history.lastMonthPrice || 0);
+    Number(history.price || 0) - Number(lastMonthHistory.price || 0);
 
   const items = [...(history.items || [])].filter(
     (item) => item.category === selectedCategory,
@@ -52,7 +58,7 @@ export function MonthlyHistory({}: MonthlyHistoryProps) {
           </Text>
         </H2>
         <Text color={"$gray10"} fontSize={"$5"}>
-          Last month: ${Number(history.lastMonthPrice || 0).toFixed(2)}
+          Last month: ${Number(lastMonthHistory.price || 0).toFixed(2)}
         </Text>
       </View>
       <Separator marginBottom={8} />

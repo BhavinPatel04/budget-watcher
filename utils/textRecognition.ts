@@ -8,6 +8,7 @@ import { getIsDollarAmount, removeNonAlphabets } from ".";
 export const parseTextFromImage = (
   result: TextRecognitionResult,
   category: Category,
+  storeName: string,
 ): ReceiptItem[] => {
   const threshold = 25;
   const lineList: TextLine[] = result.blocks.map((block) => block.lines).flat();
@@ -31,6 +32,8 @@ export const parseTextFromImage = (
         name: text,
         price: Number(amountItem.text.replace("$", "")),
         category,
+        subCategory: text,
+        storeName,
       });
     } else {
       console.info("Price not found for item", line);
